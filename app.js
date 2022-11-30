@@ -6,23 +6,35 @@ let gameType = null;
 
 let $startButton = $("#start-button");
 
-
+// *****************************************************************************
+// START A GAME
+/**
+ * 
+ * @param {*} event 
+ */
 async function startGame(event) {
     event.preventDefault();
 
     chooseRandomGameType();
     let words = chooseWords();
     let definitions = await getWordDefinitions(words);
-    updateDom(definitions);
+    updateDomGameInfo(definitions);
 }
 
 $startButton.on("click", startGame);
 
+/**
+ * 
+ */
 function chooseRandomGameType() {
     gameType = GAME_TYPES[randomInt(0, GAME_TYPES.length - 1)];
     console.log(gameType);
 }
 
+/**
+ * 
+ * @returns 
+ */
 function chooseWords() {
     if (gameType === "add" || gameType === "remove") {
         return addOneLetter[randomInt(0, addOneLetter.length - 1)];
@@ -31,6 +43,11 @@ function chooseWords() {
     }
 }
 
+/**
+ * 
+ * @param {*} words 
+ * @returns 
+ */
 async function getWordDefinitions(words) {
     let definitions = [];
     for (let word of words) {
@@ -48,6 +65,11 @@ async function getWordDefinitions(words) {
     return definitions;
 }
 
+/**
+ * 
+ * @param {*} definitions 
+ * @returns 
+ */
 function findUsableDefinition(definitions) {
     // eventually, should find first definition in the list that doesn't include
     // either word, or ideally anything close to either word...
@@ -56,20 +78,34 @@ function findUsableDefinition(definitions) {
     return definitions[0].definition;
 }
 
-function updateDom(definitions) {
+/**
+ * 
+ * @param {*} definitions 
+ */
+function updateDomGameInfo(definitions) {
     $("#first-word-def").text(definitions[0][1]);
     $("#second-word-def").text(definitions[1][1]);
 
+    let $gameTypeText = $("#game-type");
     let $gameModeText = $("#game-mode");
+
     if (gameType === "add") {
-        $gameModeText.text("...add a letter to get:")
+        $gameTypeText.text("add a letter");
+        $gameModeText.text("...add a letter to get:");
     } else if (gameType === "remove") {
-        $gameModeText.text("...remove a letter to get:")
+        $gameTypeText.text("remove a letter");
+        $gameModeText.text("...remove a letter to get:");
     } else if (gameType === "change") {
-        $gameModeText.text("...change a letter to get:")
+        $gameTypeText.text("change a letter");
+        $gameModeText.text("...change a letter to get:");
     }
 }
 
+/**
+ * 
+ * @param {*} list 
+ * @returns 
+ */
 function countWordLengths(list) {
     let lengthCounter = {};
     for (let elem of list) {
@@ -81,6 +117,24 @@ function countWordLengths(list) {
 }
 
 
+// *****************************************************************************
+// GAME FUNCTIONALITY
+
+function checkWinConditionAndUpdateDom() {
+
+}
+
+function checkWinCondition() {
+
+}
+
+function updateDomWinCondition() {
+
+}
+
+
+// *****************************************************************************
+// UTILITIES
 /**
  * generates a random integer, inclusive of the bounds provided
  * @param {integer} low - low bound
