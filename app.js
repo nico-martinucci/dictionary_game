@@ -85,20 +85,11 @@ function findUsableDefinition(definitions) {
 function updateDomGameInfo(definitions) {
     $("#first-word-def").text(definitions[0][1]);
     $("#second-word-def").text(definitions[1][1]);
+    
+    let updateText = `${gameType} a letter`
 
-    let $gameTypeText = $("#game-type");
-    let $gameModeText = $("#game-mode");
-
-    if (gameType === "add") {
-        $gameTypeText.text("add a letter");
-        $gameModeText.text("...add a letter to get:");
-    } else if (gameType === "remove") {
-        $gameTypeText.text("remove a letter");
-        $gameModeText.text("...remove a letter to get:");
-    } else if (gameType === "change") {
-        $gameTypeText.text("change a letter");
-        $gameModeText.text("...change a letter to get:");
-    }
+    $("#game-type").text(updateText);
+    $("#game-mode").text(`...${updateText} to get:`);
 }
 
 /**
