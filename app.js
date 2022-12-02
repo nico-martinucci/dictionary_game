@@ -120,9 +120,11 @@ function countWordLengths(list) {
 // *****************************************************************************
 // GAME FUNCTIONALITY
 
-function checkWinConditionAndUpdateDom() {
-
+function checkWinConditionAndUpdateDom(event) {
+    console.log(event)
 }
+
+$("#game").on("input", "input", checkWinConditionAndUpdateDom)
 
 function checkWinCondition() {
 
