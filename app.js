@@ -85,7 +85,7 @@ function findUsableDefinition(definitions) {
 function updateDomGameInfo(definitions) {
     $("#first-word-def").text(definitions[0][1]);
     $("#second-word-def").text(definitions[1][1]);
-    
+
     let updateText = `${gameType} a letter`
 
     $("#game-type").text(updateText);
@@ -134,7 +134,7 @@ function updateDomWinCondition() {
  * @param {integer} high - high bound
  * @returns random integer
  */
- function randomInt(low, high) {
+function randomInt(low, high) {
     if (typeof low !== "number" || typeof high !== "number") {
         throw new Error("Invalid data type - both arguments must be numbers")
     }
